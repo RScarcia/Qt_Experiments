@@ -97,15 +97,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <QtRcc Include="MainWindow.qrc" />
-    <QtUic Include="AddDialog.ui" />
     <QtUic Include="AddWindow.ui" />
     <QtUic Include="MainWindow.ui" />
     <QtMoc Include="MainWindow.h" />
-    <ClCompile Include="AddDialog.cpp" />
     <ClCompile Include="AddWindow.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="main.cpp" />
-    <QtMoc Include="AddDialog.h" />
     <QtMoc Include="AddWindow.h" />
     <ClInclude Include="stdafx.h" />
     <ClCompile Include="stdafx.cpp">
