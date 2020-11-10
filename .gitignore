@@ -1,6 +1,3 @@
-/Address_Book_FINAL/MainWindow/x64
-/Address_Book_FINAL/MainWindow/.vs
-
 # Prerequisites
 *.d
 
@@ -33,4 +30,5 @@
 *.exe
 *.out
 *.app
-/MainWindow/.vs/MainWindow/v16
+/MainWindow/.vs
+/MainWindow/x64
