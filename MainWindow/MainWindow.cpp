@@ -1,15 +1,18 @@
 #include "MainWindow.h"
 #include "stdafx.h"
-#include "AddDialog.h"
 #include <QMessageBox>
 #include "AddWindow.h"
 #include <QCloseEvent>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
     ui.setupUi(this);
     
     connect(&aggiungi, SIGNAL(addItem(QString, QString, QString, QString, QString, QString)),
             this, SLOT(updateTable(QString, QString, QString, QString, QString, QString)));
+
+    connect(this, SIGNAL(sendObject(QString, QString, QString, QString, QString, QString)),
+            &aggiungi, SLOT(receiveFromGUI(QString, QString, QString, QString, QString, QString)));
 }
 
 void MainWindow::updateTable(QString PhotoURL, QString Name, QString Surname, QString Address, QString Phone, QString Mail) {
@@ -20,11 +23,13 @@ void MainWindow::updateTable(QString PhotoURL, QString Name, QString Surname, QS
     QTableWidgetItem* photoItem = new QTableWidgetItem();
     if (PhotoURL.isEmpty()) {
         photoItem->setData(Qt::DecorationRole,
-                           QPixmap("C:/Users/Rossella/Visual_Studio_2019/VisualStudio_Source/repos/MainWindow/Images/man256.png").scaled(100, 100,
+                           QPixmap("C:/Users/Rossella/Documents/GitHub/Address_Book_FINAL/MainWindow/Images/man256.png").scaled(100, 100,
                                                                                                                                          Qt::KeepAspectRatio, 
                                                                                                                                          Qt::SmoothTransformation));
+        pixURL = "C:/Users/Rossella/Documents/GitHub/Address_Book_FINAL/MainWindow/Images/man256.png";
     } else {
         photoItem->setData(Qt::DecorationRole, QPixmap(PhotoURL).scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        pixURL = PhotoURL;
     }
 
 	ui.addressList->setItem(row, 0, photoItem);
@@ -55,39 +60,40 @@ void MainWindow::closeEvent(QCloseEvent* event) {
     }
 }
 
-//void MainWindow::on_addressList_currentItemChanged() {
-//   
-//    for (int row = 0; row < 6; row++) {
-//        for (int column = 0; column < 6; column++) {
-//            
-//        }
-//    }
-//    
-//    
-//    
-//    /*QListWidgetItem* curItem = ui.addressList->currentItem();
-//
-//    if (curItem) {
-//        ui.nameLabel->setText("Name: " + curItem->text());
-//        ui.emailLabel->setText("E-Mail: " + curItem->data(Qt::UserRole).toString());
-//    } else {
-//        ui.nameLabel->setText("<No item selected>");
-//        ui.emailLabel->clear();
-//    }*/
-//}
+void MainWindow::on_deleteButton_clicked() {
+    QTableWidgetItem* curItem = ui.addressList->currentItem();
 
-//void MainWindow::on_deleteButton_clicked() {
-//    QListWidgetItem* curItem = ui.addressList->currentItem();
-//
-//    if (curItem) {
-//        int row = ui.addressList->row(curItem);
-//        ui.addressList->takeItem(row);
-//        delete curItem;
-//
-//        if (ui.addressList->count() > 0) {
-//            ui.addressList->setCurrentRow(0);
-//        } else {
-//            on_addressList_currentItemChanged();
-//        }
-//    }
-//}
+    if (curItem) {
+        int row = ui.addressList->row(curItem);
+        for (int i = 0; i < 6; i++) {
+            ui.addressList->takeItem(row, i);
+        }
+        delete curItem;
+        ui.addressList->removeRow(row);
+    }
+}
+
+void MainWindow::on_modifyButton_clicked() {
+    QTableWidgetItem* curItem = ui.addressList->currentItem();
+
+    //if (curItem) { 
+        int row = ui.addressList->row(curItem);
+        
+        QString curName = ui.addressList->item(row, 1)->text();
+        QString curSurname = ui.addressList->item(row, 2)->text();
+        QString curAddress = ui.addressList->item(row, 3)->text();
+        QString curPhone = ui.addressList->item(row, 4)->text();
+        QString curMail = ui.addressList->item(row, 5)->text();
+
+        //qInfo() << "Photo" << pixURL;
+        for (int i = 1; i < 6; i++) {
+            //ui.addressList->takeItem(row, i);
+            qInfo() << "Item" << i << ":" << ui.addressList->item(row,i)->text();
+            //QSt
+        }
+        emit sendObject(pixURL, curName, curSurname, curAddress, curPhone, curMail);
+    //}
+
+    aggiungi.show();
+    //emit sendObject(fileUrl, name, surname, address, phone, mail);
+}

@@ -31,6 +31,7 @@ public:
     QVBoxLayout *verticalLayout;
     QPushButton *addButton;
     QPushButton *deleteButton;
+    QPushButton *modifyButton;
     QSpacerItem *verticalSpacer;
 
     void setupUi(QWidget *MainWindowClass)
@@ -79,13 +80,14 @@ public:
         font1.setFamily(QString::fromUtf8("Lato"));
         addressList->setFont(font1);
         addressList->setStyleSheet(QString::fromUtf8("QTableWidget{\n"
-"	background-color: #C0C0C0;\n"
-"	alternate-background-color: #606060;\n"
-"	selection-background-color: #282828;\n"
+"	background-color: #ffffff;\n"
+"	alternate-background-color: #d0edff;\n"
+"	selection-background-color: #89c8ff;\n"
 "}"));
+        addressList->setEditTriggers(QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed);
         addressList->setAlternatingRowColors(true);
         addressList->setRowCount(0);
-        addressList->horizontalHeader()->setStretchLastSection(true);
+        addressList->horizontalHeader()->setStretchLastSection(false);
 
         gridLayout->addWidget(addressList, 0, 0, 1, 1);
 
@@ -97,15 +99,21 @@ public:
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         addButton = new QPushButton(MainWindowClass);
         addButton->setObjectName(QString::fromUtf8("addButton"));
-        addButton->setFont(font1);
+        addButton->setFont(font);
 
         verticalLayout->addWidget(addButton);
 
         deleteButton = new QPushButton(MainWindowClass);
         deleteButton->setObjectName(QString::fromUtf8("deleteButton"));
-        deleteButton->setFont(font1);
+        deleteButton->setFont(font);
 
         verticalLayout->addWidget(deleteButton);
+
+        modifyButton = new QPushButton(MainWindowClass);
+        modifyButton->setObjectName(QString::fromUtf8("modifyButton"));
+        modifyButton->setFont(font);
+
+        verticalLayout->addWidget(modifyButton);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -140,6 +148,7 @@ public:
         ___qtablewidgetitem5->setText(QCoreApplication::translate("MainWindowClass", "E-mail", nullptr));
         addButton->setText(QCoreApplication::translate("MainWindowClass", "Add", nullptr));
         deleteButton->setText(QCoreApplication::translate("MainWindowClass", "Delete", nullptr));
+        modifyButton->setText(QCoreApplication::translate("MainWindowClass", "Modify", nullptr));
     } // retranslateUi
 
 };

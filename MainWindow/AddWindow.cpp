@@ -52,6 +52,18 @@ void AddWindow::on_okButton_clicked() {
 	close();
 }
 
+void AddWindow::receiveFromGUI(QString oldPix, QString oldName, QString oldSurname, QString oldAddress, QString oldPhone, QString oldMail) {
+	
+	QPixmap oldPhoto(oldPix);
+	avatarPhoto->setPixmap(oldPhoto.scaled(256, 256, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+	nameEdit->setText(oldName);
+	surnameEdit->setText(oldSurname);
+	addressEdit->setText(oldAddress);
+	phoneEdit->setText(oldPhone);
+	emailEdit->setText(oldMail);
+
+}
+
 AddWindow::~AddWindow()
 {
 }

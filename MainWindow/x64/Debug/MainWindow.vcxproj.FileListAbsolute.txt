@@ -1,2 +1,4 @@
 C:\Users\Rossella\Visual_Studio_2019\VisualStudio_Source\repos\MainWindow\x64\Debug\MainWindow.exe
 C:\Users\Rossella\Visual_Studio_2019\VisualStudio_Source\repos\MainWindow\x64\Debug\MainWindow.pdb
+C:\Users\Rossella\Documents\GitHub\Address_Book_FINAL\MainWindow\x64\Debug\MainWindow.exe
+C:\Users\Rossella\Documents\GitHub\Address_Book_FINAL\MainWindow\x64\Debug\MainWindow.pdb

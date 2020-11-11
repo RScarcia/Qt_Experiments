@@ -20,10 +20,11 @@ public:
 
 private:
 
+signals:
+	void addItem(QString photoUrl, QString newName, QString newSurname, QString newAddress, QString newPhone, QString newMail);
+
 private slots:
 	void on_loadPhotoButton_clicked();
 	void on_okButton_clicked();
-
-signals:
-	void addItem(QString photoUrl, QString newName, QString newSurname, QString newAddress, QString newPhone, QString newMail);
+	void receiveFromGUI(QString oldPix, QString oldName, QString oldSurname, QString oldAddress, QString oldPhone, QString oldMail);
 };

@@ -15,13 +15,16 @@ public:
 private:
     Ui::MainWindowClass ui;
     AddWindow aggiungi;
+    QString pixURL = "";
     void closeEvent(QCloseEvent* event);
 
 signals:
+    void sendObject(QString PIX_URL, QString curName, QString curSurname, QString curAddress, QString curPhone, QString curMail);
 
 private slots:
     void updateTable(QString PhotoURL, QString Name, QString Surname, QString Address, QString Phone, QString Mail);
     void on_addButton_clicked();
+    void on_deleteButton_clicked();
+    void on_modifyButton_clicked();
     //void on_addressList_currentItemChanged();
-    //void on_deleteButton_clicked();
 };
