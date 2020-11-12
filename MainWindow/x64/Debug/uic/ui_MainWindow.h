@@ -31,7 +31,7 @@ public:
     QVBoxLayout *verticalLayout;
     QPushButton *addButton;
     QPushButton *deleteButton;
-    QPushButton *modifyButton;
+    QPushButton *editButton;
     QSpacerItem *verticalSpacer;
 
     void setupUi(QWidget *MainWindowClass)
@@ -84,7 +84,7 @@ public:
 "	alternate-background-color: #d0edff;\n"
 "	selection-background-color: #89c8ff;\n"
 "}"));
-        addressList->setEditTriggers(QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed);
+        addressList->setEditTriggers(QAbstractItemView::EditKeyPressed);
         addressList->setAlternatingRowColors(true);
         addressList->setRowCount(0);
         addressList->horizontalHeader()->setStretchLastSection(false);
@@ -109,11 +109,11 @@ public:
 
         verticalLayout->addWidget(deleteButton);
 
-        modifyButton = new QPushButton(MainWindowClass);
-        modifyButton->setObjectName(QString::fromUtf8("modifyButton"));
-        modifyButton->setFont(font);
+        editButton = new QPushButton(MainWindowClass);
+        editButton->setObjectName(QString::fromUtf8("editButton"));
+        editButton->setFont(font);
 
-        verticalLayout->addWidget(modifyButton);
+        verticalLayout->addWidget(editButton);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -148,7 +148,7 @@ public:
         ___qtablewidgetitem5->setText(QCoreApplication::translate("MainWindowClass", "E-mail", nullptr));
         addButton->setText(QCoreApplication::translate("MainWindowClass", "Add", nullptr));
         deleteButton->setText(QCoreApplication::translate("MainWindowClass", "Delete", nullptr));
-        modifyButton->setText(QCoreApplication::translate("MainWindowClass", "Modify", nullptr));
+        editButton->setText(QCoreApplication::translate("MainWindowClass", "Edit", nullptr));
     } // retranslateUi
 
 };

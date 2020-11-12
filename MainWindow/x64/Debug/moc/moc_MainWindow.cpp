@@ -24,7 +24,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
     QByteArrayData data[19];
-    char stringdata0[200];
+    char stringdata0[198];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -51,14 +51,14 @@ QT_MOC_LITERAL(14, 120, 5), // "Phone"
 QT_MOC_LITERAL(15, 126, 4), // "Mail"
 QT_MOC_LITERAL(16, 131, 20), // "on_addButton_clicked"
 QT_MOC_LITERAL(17, 152, 23), // "on_deleteButton_clicked"
-QT_MOC_LITERAL(18, 176, 23) // "on_modifyButton_clicked"
+QT_MOC_LITERAL(18, 176, 21) // "on_editButton_clicked"
 
     },
     "MainWindow\0sendObject\0\0PIX_URL\0curName\0"
     "curSurname\0curAddress\0curPhone\0curMail\0"
     "updateTable\0PhotoURL\0Name\0Surname\0"
     "Address\0Phone\0Mail\0on_addButton_clicked\0"
-    "on_deleteButton_clicked\0on_modifyButton_clicked"
+    "on_deleteButton_clicked\0on_editButton_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -106,7 +106,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 1: _t->updateTable((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3])),(*reinterpret_cast< QString(*)>(_a[4])),(*reinterpret_cast< QString(*)>(_a[5])),(*reinterpret_cast< QString(*)>(_a[6]))); break;
         case 2: _t->on_addButton_clicked(); break;
         case 3: _t->on_deleteButton_clicked(); break;
-        case 4: _t->on_modifyButton_clicked(); break;
+        case 4: _t->on_editButton_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

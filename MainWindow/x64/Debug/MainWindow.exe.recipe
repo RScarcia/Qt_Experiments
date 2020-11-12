@@ -1,7 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project>
-  <ProjectOutputs>C:\Users\Rossella\Documents\GitHub\Address_Book_FINAL\MainWindow\x64\Debug\MainWindow.exe</ProjectOutputs>
-  <ContentFiles></ContentFiles>
-  <SatelliteDlls></SatelliteDlls>
-  <NonRecipeFileRefs></NonRecipeFileRefs>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>C:\Users\Rossella\Documents\GitHub\Address_Book_FINAL\MainWindow\x64\Debug\MainWindow.exe</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles />
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
 </Project>

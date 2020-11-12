@@ -16,16 +16,24 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
 }
 
 void MainWindow::updateTable(QString PhotoURL, QString Name, QString Surname, QString Address, QString Phone, QString Mail) {
-        
-    ui.addressList->insertRow(ui.addressList->rowCount());
-	int row = ui.addressList->rowCount() - 1;
+    
+    QTableWidgetItem* curItem = ui.addressList->currentItem();
+    int row = 0;
+    if(curItem){
+        //qInfo() << "Current_ROW:" << ui.addressList->row(curItem);
+        row = ui.addressList->row(curItem);
 
+    } else {
+        ui.addressList->insertRow(ui.addressList->rowCount());
+	    row = ui.addressList->rowCount() - 1;
+    }
+       
     QTableWidgetItem* photoItem = new QTableWidgetItem();
     if (PhotoURL.isEmpty()) {
         photoItem->setData(Qt::DecorationRole,
-                           QPixmap("C:/Users/Rossella/Documents/GitHub/Address_Book_FINAL/MainWindow/Images/man256.png").scaled(100, 100,
-                                                                                                                                         Qt::KeepAspectRatio, 
-                                                                                                                                         Qt::SmoothTransformation));
+                            QPixmap("C:/Users/Rossella/Documents/GitHub/Address_Book_FINAL/MainWindow/Images/man256.png").scaled(100, 100,
+                                                                                                                                 Qt::KeepAspectRatio, 
+                                                                                                                                 Qt::SmoothTransformation));
         pixURL = "C:/Users/Rossella/Documents/GitHub/Address_Book_FINAL/MainWindow/Images/man256.png";
     } else {
         photoItem->setData(Qt::DecorationRole, QPixmap(PhotoURL).scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
@@ -42,6 +50,7 @@ void MainWindow::updateTable(QString PhotoURL, QString Name, QString Surname, QS
 	ui.addressList->setColumnWidth(0, 100);
 	ui.addressList->setRowHeight(row, 100);
     ui.addressList->resizeColumnsToContents();
+
 }
 
 void MainWindow::on_addButton_clicked() {
@@ -73,10 +82,10 @@ void MainWindow::on_deleteButton_clicked() {
     }
 }
 
-void MainWindow::on_modifyButton_clicked() {
+void MainWindow::on_editButton_clicked() {
     QTableWidgetItem* curItem = ui.addressList->currentItem();
 
-    //if (curItem) { 
+    if (curItem) { 
         int row = ui.addressList->row(curItem);
         
         QString curName = ui.addressList->item(row, 1)->text();
@@ -85,15 +94,9 @@ void MainWindow::on_modifyButton_clicked() {
         QString curPhone = ui.addressList->item(row, 4)->text();
         QString curMail = ui.addressList->item(row, 5)->text();
 
-        //qInfo() << "Photo" << pixURL;
-        for (int i = 1; i < 6; i++) {
-            //ui.addressList->takeItem(row, i);
-            qInfo() << "Item" << i << ":" << ui.addressList->item(row,i)->text();
-            //QSt
-        }
         emit sendObject(pixURL, curName, curSurname, curAddress, curPhone, curMail);
-    //}
-
-    aggiungi.show();
-    //emit sendObject(fileUrl, name, surname, address, phone, mail);
+        aggiungi.show();
+    }
+    /*qInfo() << "Row:" << ui.addressList->row(curItem);
+    qInfo() << "RowCount:" << ui.addressList->rowCount();*/
 }

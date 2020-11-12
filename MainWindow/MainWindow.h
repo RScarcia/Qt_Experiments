@@ -25,6 +25,6 @@ private slots:
     void updateTable(QString PhotoURL, QString Name, QString Surname, QString Address, QString Phone, QString Mail);
     void on_addButton_clicked();
     void on_deleteButton_clicked();
-    void on_modifyButton_clicked();
+    void on_editButton_clicked();
     //void on_addressList_currentItemChanged();
 };
