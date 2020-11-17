@@ -16,7 +16,7 @@ private:
     Ui::MainWindowClass ui;
     AddWindow aggiungi;
     QList<QString> listURL;
-    QString pixURL = "";
+    //QString pixURL = "";
     void closeEvent(QCloseEvent* event);
 
 signals:

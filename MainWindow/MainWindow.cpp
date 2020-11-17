@@ -38,12 +38,16 @@ void MainWindow::updateTable(QString PhotoURL, QString Name, QString Surname, QS
                             QPixmap("C:/Users/Rossella/Documents/GitHub/Address_Book_FINAL/MainWindow/Images/man256.png").scaled(100, 100,
                                                                                                                                  Qt::KeepAspectRatio, 
                                                                                                                                  Qt::SmoothTransformation));
-        pixURL = "C:/Users/Rossella/Documents/GitHub/Address_Book_FINAL/MainWindow/Images/man256.png";
-        listURL.append(pixURL);
+
+        listURL.append("C:/Users/Rossella/Documents/GitHub/Address_Book_FINAL/MainWindow/Images/man256.png");
     } else {
         photoItem->setData(Qt::DecorationRole, QPixmap(PhotoURL).scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-        pixURL = PhotoURL;
-        listURL.replace(row, pixURL);
+        listURL.append(PhotoURL);
+
+        if (listURL.at(row) != NULL) {
+            listURL.replace(row, PhotoURL);
+        }
+        
     }
 
 	ui.addressList->setItem(row, 0, photoItem);
@@ -80,6 +84,7 @@ void MainWindow::on_deleteButton_clicked() {
 
     if (curItem) {
         int row = ui.addressList->row(curItem);
+        listURL.takeAt(row);
         for (int i = 0; i < 6; i++) {
             ui.addressList->takeItem(row, i);
         }
@@ -93,14 +98,15 @@ void MainWindow::on_editButton_clicked() {
 
     if (curItem) { 
         int row = ui.addressList->row(curItem);
-        
+
+        QString curPhoto = listURL.at(row);
         QString curName = ui.addressList->item(row, 1)->text();
         QString curSurname = ui.addressList->item(row, 2)->text();
         QString curAddress = ui.addressList->item(row, 3)->text();
         QString curPhone = ui.addressList->item(row, 4)->text();
         QString curMail = ui.addressList->item(row, 5)->text();
 
-        emit sendObject(pixURL, curName, curSurname, curAddress, curPhone, curMail);
+        emit sendObject(curPhoto, curName, curSurname, curAddress, curPhone, curMail);
         aggiungi.show();
     }
     /*qInfo() << "Row:" << ui.addressList->row(curItem);
@@ -129,7 +135,7 @@ void MainWindow::on_saveButton_clicked() {
 
     Format* textFormat = book->addFormat();
     textFormat->setFont(textFont);
-    textFormat->setAlignH(ALIGNH_LEFT);
+    textFormat->setAlignH(ALIGNH_DISTRIBUTED);
 
 
     sheet->writeStr(1, 0, L"Photo", titleFormat);
@@ -142,30 +148,31 @@ void MainWindow::on_saveButton_clicked() {
    
     //items
     for (int row = 0; row < (ui.addressList->rowCount()); ++row) {
-        //sheet->setRow(row +3, 15);
+        //altezza
+        sheet->setRow(row + 2, 45);
+        //larghezza
+        sheet->setCol(0, 0, 8);
+        sheet->setCol(1, 4, 13);
+        sheet->setCol(5, 5, 20);
         qInfo() << "PICTURE:" << listURL.at(row);
-        /*int id = book->addPicture(pixURL.toStdWString().c_str());
-        sheet->setPicture(row + 2, 0, id);*/
+        int id = book->addPicture(listURL.at(row).toStdWString().c_str());
+        sheet->setPicture(row + 2, 0, id, 0);
         
         for (int col = 1; col < 6; ++col) {
-            
-            /*qInfo() << "Nome:" << nome;
-            qInfo() << "Nome_ROW:" << nome->row();*/
             QString nome = ui.addressList->item(row, col)->text();
             QString cognome = ui.addressList->item(row, col)->text();
             QString indirizzo = ui.addressList->item(row, col)->text();
             QString telefono = ui.addressList->item(row, col)->text();
             QString internet = ui.addressList->item(row, col)->text();
             
-
             sheet->writeStr(row + 2, col, nome.toStdWString().c_str(), textFormat);
             sheet->writeStr(row + 2, col, cognome.toStdWString().c_str(), textFormat);
             sheet->writeStr(row + 2, col, indirizzo.toStdWString().c_str(), textFormat);
             sheet->writeStr(row + 2, col, telefono.toStdWString().c_str(), textFormat);
             sheet->writeStr(row + 2, col, internet.toStdWString().c_str(), textFormat);
-            
+            /*qInfo() << "Nome:" << nome;
+            qInfo() << "Nome_ROW:" << nome->row();*/    
         }
-
     }
 
     //saving
