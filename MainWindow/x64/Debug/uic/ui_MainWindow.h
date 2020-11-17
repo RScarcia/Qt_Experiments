@@ -32,6 +32,7 @@ public:
     QPushButton *addButton;
     QPushButton *deleteButton;
     QPushButton *editButton;
+    QPushButton *saveButton;
     QSpacerItem *verticalSpacer;
 
     void setupUi(QWidget *MainWindowClass)
@@ -95,8 +96,9 @@ public:
         gridLayout_2->addLayout(gridLayout, 0, 0, 1, 1);
 
         verticalLayout = new QVBoxLayout();
-        verticalLayout->setSpacing(6);
+        verticalLayout->setSpacing(15);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setContentsMargins(-1, 10, -1, -1);
         addButton = new QPushButton(MainWindowClass);
         addButton->setObjectName(QString::fromUtf8("addButton"));
         addButton->setFont(font);
@@ -114,6 +116,12 @@ public:
         editButton->setFont(font);
 
         verticalLayout->addWidget(editButton);
+
+        saveButton = new QPushButton(MainWindowClass);
+        saveButton->setObjectName(QString::fromUtf8("saveButton"));
+        saveButton->setFont(font);
+
+        verticalLayout->addWidget(saveButton);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -149,6 +157,7 @@ public:
         addButton->setText(QCoreApplication::translate("MainWindowClass", "Add", nullptr));
         deleteButton->setText(QCoreApplication::translate("MainWindowClass", "Delete", nullptr));
         editButton->setText(QCoreApplication::translate("MainWindowClass", "Edit", nullptr));
+        saveButton->setText(QCoreApplication::translate("MainWindowClass", "Save", nullptr));
     } // retranslateUi
 
 };

@@ -4,6 +4,10 @@
 #include "AddWindow.h"
 #include <QCloseEvent>
 #include <QDebug>
+#include "libxl.h"
+#include <sstream>
+
+using namespace libxl;
 
 MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
     ui.setupUi(this);
@@ -35,9 +39,11 @@ void MainWindow::updateTable(QString PhotoURL, QString Name, QString Surname, QS
                                                                                                                                  Qt::KeepAspectRatio, 
                                                                                                                                  Qt::SmoothTransformation));
         pixURL = "C:/Users/Rossella/Documents/GitHub/Address_Book_FINAL/MainWindow/Images/man256.png";
+        listURL.append(pixURL);
     } else {
         photoItem->setData(Qt::DecorationRole, QPixmap(PhotoURL).scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
         pixURL = PhotoURL;
+        listURL.replace(row, pixURL);
     }
 
 	ui.addressList->setItem(row, 0, photoItem);
@@ -99,4 +105,71 @@ void MainWindow::on_editButton_clicked() {
     }
     /*qInfo() << "Row:" << ui.addressList->row(curItem);
     qInfo() << "RowCount:" << ui.addressList->rowCount();*/
+}
+
+void MainWindow::on_saveButton_clicked() {
+    
+    Book* book = xlCreateBook();
+    Sheet* sheet = book->addSheet(L"Address Book");
+
+    //style
+    Font* titleFont = book->addFont();
+    titleFont->setSize(12);
+    titleFont->setBold(true);
+    titleFont->setName(L"Lato");
+
+    Font* textFont = book->addFont();
+    textFont->setSize(10);
+    textFont->setName(L"Lato");
+
+    //format
+    Format* titleFormat = book->addFormat();
+    titleFormat->setFont(titleFont);
+    titleFormat->setAlignH(ALIGNH_CENTER);
+
+    Format* textFormat = book->addFormat();
+    textFormat->setFont(textFont);
+    textFormat->setAlignH(ALIGNH_LEFT);
+
+
+    sheet->writeStr(1, 0, L"Photo", titleFormat);
+    sheet->writeStr(1, 1, L"Name", titleFormat);
+    sheet->writeStr(1, 2, L"Surname", titleFormat);
+    sheet->writeStr(1, 3, L"Address", titleFormat);
+    sheet->writeStr(1, 4, L"Phone", titleFormat);
+    sheet->writeStr(1, 5, L"E-Mail", titleFormat);
+
+   
+    //items
+    for (int row = 0; row < (ui.addressList->rowCount()); ++row) {
+        //sheet->setRow(row +3, 15);
+        qInfo() << "PICTURE:" << listURL.at(row);
+        /*int id = book->addPicture(pixURL.toStdWString().c_str());
+        sheet->setPicture(row + 2, 0, id);*/
+        
+        for (int col = 1; col < 6; ++col) {
+            
+            /*qInfo() << "Nome:" << nome;
+            qInfo() << "Nome_ROW:" << nome->row();*/
+            QString nome = ui.addressList->item(row, col)->text();
+            QString cognome = ui.addressList->item(row, col)->text();
+            QString indirizzo = ui.addressList->item(row, col)->text();
+            QString telefono = ui.addressList->item(row, col)->text();
+            QString internet = ui.addressList->item(row, col)->text();
+            
+
+            sheet->writeStr(row + 2, col, nome.toStdWString().c_str(), textFormat);
+            sheet->writeStr(row + 2, col, cognome.toStdWString().c_str(), textFormat);
+            sheet->writeStr(row + 2, col, indirizzo.toStdWString().c_str(), textFormat);
+            sheet->writeStr(row + 2, col, telefono.toStdWString().c_str(), textFormat);
+            sheet->writeStr(row + 2, col, internet.toStdWString().c_str(), textFormat);
+            
+        }
+
+    }
+
+    //saving
+    book->save(L"address_book.xls");
+    qInfo() << "SAVED";
+    book->release();
 }

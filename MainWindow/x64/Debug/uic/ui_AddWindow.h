@@ -51,12 +51,13 @@ public:
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer;
     QPushButton *okButton;
+    QPushButton *cancelButton;
 
     void setupUi(QWidget *AddWindow)
     {
         if (AddWindow->objectName().isEmpty())
             AddWindow->setObjectName(QString::fromUtf8("AddWindow"));
-        AddWindow->resize(793, 409);
+        AddWindow->resize(793, 418);
         gridLayout_2 = new QGridLayout(AddWindow);
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -199,7 +200,7 @@ public:
         verticalLayout_3->addLayout(horizontalLayout_2);
 
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setSpacing(6);
+        horizontalLayout->setSpacing(10);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalLayout->setContentsMargins(-1, 10, 20, 10);
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
@@ -211,6 +212,12 @@ public:
         okButton->setFont(font);
 
         horizontalLayout->addWidget(okButton);
+
+        cancelButton = new QPushButton(AddWindow);
+        cancelButton->setObjectName(QString::fromUtf8("cancelButton"));
+        cancelButton->setFont(font);
+
+        horizontalLayout->addWidget(cancelButton);
 
 
         verticalLayout_3->addLayout(horizontalLayout);
@@ -242,6 +249,7 @@ public:
         avatarLabel->setText(QCoreApplication::translate("AddWindow", "Avatar", nullptr));
         loadPhotoButton->setText(QCoreApplication::translate("AddWindow", "Load...", nullptr));
         okButton->setText(QCoreApplication::translate("AddWindow", "OK", nullptr));
+        cancelButton->setText(QCoreApplication::translate("AddWindow", "Cancel", nullptr));
     } // retranslateUi
 
 };

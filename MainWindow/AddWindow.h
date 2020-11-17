@@ -19,6 +19,7 @@ public:
 	~AddWindow();
 
 private:
+	void closeEvent(QCloseEvent* event);
 
 signals:
 	void addItem(QString photoUrl, QString newName, QString newSurname, QString newAddress, QString newPhone, QString newMail);
@@ -26,5 +27,6 @@ signals:
 private slots:
 	void on_loadPhotoButton_clicked();
 	void on_okButton_clicked();
+	void on_cancelButton_clicked();
 	void receiveFromGUI(QString oldPix, QString oldName, QString oldSurname, QString oldAddress, QString oldPhone, QString oldMail);
 };

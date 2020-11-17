@@ -4,6 +4,7 @@
 #include "MainWindow.h"
 #include "stdafx.h"
 #include <QMessageBox>
+#include <QCloseEvent>
 
 
 AddWindow::AddWindow(QWidget *parent): QWidget(parent){
@@ -62,6 +63,27 @@ void AddWindow::receiveFromGUI(QString oldPix, QString oldName, QString oldSurna
 	phoneEdit->setText(oldPhone);
 	emailEdit->setText(oldMail);
 
+}
+
+void AddWindow::on_cancelButton_clicked() {
+	fileUrl = "";
+	avatarPhoto->clear();
+	nameEdit->setText("");
+	surnameEdit->setText("");
+	addressEdit->setText("");
+	phoneEdit->setText("");
+	emailEdit->setText("");
+	close();
+}
+
+void AddWindow::closeEvent(QCloseEvent* event) {
+	fileUrl = "";
+	avatarPhoto->clear();
+	nameEdit->setText("");
+	surnameEdit->setText("");
+	addressEdit->setText("");
+	phoneEdit->setText("");
+	emailEdit->setText("");
 }
 
 AddWindow::~AddWindow()
