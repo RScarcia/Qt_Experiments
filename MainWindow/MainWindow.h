@@ -16,7 +16,6 @@ private:
     Ui::MainWindowClass ui;
     AddWindow aggiungi;
     QList<QString> listURL;
-    //QString pixURL = "";
     void closeEvent(QCloseEvent* event);
 
 signals:
@@ -28,5 +27,5 @@ private slots:
     void on_deleteButton_clicked();
     void on_editButton_clicked();
     void on_saveButton_clicked();
-    //void on_addressList_currentItemChanged();
+    //void on_loadButton_clicked();
 };

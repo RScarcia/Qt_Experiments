@@ -32,3 +32,4 @@
 *.app
 /MainWindow/.vs
 /MainWindow/x64
+/MainWindow/address_book.xls

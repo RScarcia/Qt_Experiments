@@ -32,14 +32,19 @@ public:
     QPushButton *addButton;
     QPushButton *deleteButton;
     QPushButton *editButton;
+    QSpacerItem *verticalSpacer_2;
     QPushButton *saveButton;
-    QSpacerItem *verticalSpacer;
+    QPushButton *loadButton;
 
     void setupUi(QWidget *MainWindowClass)
     {
         if (MainWindowClass->objectName().isEmpty())
             MainWindowClass->setObjectName(QString::fromUtf8("MainWindowClass"));
         MainWindowClass->resize(954, 561);
+        QFont font;
+        font.setFamily(QString::fromUtf8("Lato"));
+        font.setPointSize(9);
+        MainWindowClass->setFont(font);
         gridLayout_3 = new QGridLayout(MainWindowClass);
         gridLayout_3->setSpacing(6);
         gridLayout_3->setContentsMargins(11, 11, 11, 11);
@@ -55,9 +60,6 @@ public:
         addressList = new QTableWidget(MainWindowClass);
         if (addressList->columnCount() < 6)
             addressList->setColumnCount(6);
-        QFont font;
-        font.setFamily(QString::fromUtf8("Lato"));
-        font.setPointSize(9);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
         __qtablewidgetitem->setFont(font);
         addressList->setHorizontalHeaderItem(0, __qtablewidgetitem);
@@ -87,8 +89,11 @@ public:
 "}"));
         addressList->setEditTriggers(QAbstractItemView::EditKeyPressed);
         addressList->setAlternatingRowColors(true);
+        addressList->setSortingEnabled(true);
         addressList->setRowCount(0);
         addressList->horizontalHeader()->setStretchLastSection(false);
+        addressList->verticalHeader()->setMinimumSectionSize(50);
+        addressList->verticalHeader()->setDefaultSectionSize(50);
 
         gridLayout->addWidget(addressList, 0, 0, 1, 1);
 
@@ -117,15 +122,21 @@ public:
 
         verticalLayout->addWidget(editButton);
 
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout->addItem(verticalSpacer_2);
+
         saveButton = new QPushButton(MainWindowClass);
         saveButton->setObjectName(QString::fromUtf8("saveButton"));
         saveButton->setFont(font);
 
         verticalLayout->addWidget(saveButton);
 
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        loadButton = new QPushButton(MainWindowClass);
+        loadButton->setObjectName(QString::fromUtf8("loadButton"));
+        loadButton->setFont(font);
 
-        verticalLayout->addItem(verticalSpacer);
+        verticalLayout->addWidget(loadButton);
 
 
         gridLayout_2->addLayout(verticalLayout, 0, 1, 1, 1);
@@ -158,6 +169,7 @@ public:
         deleteButton->setText(QCoreApplication::translate("MainWindowClass", "Delete", nullptr));
         editButton->setText(QCoreApplication::translate("MainWindowClass", "Edit", nullptr));
         saveButton->setText(QCoreApplication::translate("MainWindowClass", "Save", nullptr));
+        loadButton->setText(QCoreApplication::translate("MainWindowClass", "Load", nullptr));
     } // retranslateUi
 
 };

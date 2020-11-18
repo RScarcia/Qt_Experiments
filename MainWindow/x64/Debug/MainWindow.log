@@ -1,2 +1,6 @@
-﻿  MainWindow.cpp
+﻿  moc MainWindow.h
+  AddWindow.cpp
+  MainWindow.cpp
+  main.cpp
+  moc_MainWindow.cpp
   MainWindow.vcxproj -> C:\Users\Rossella\Documents\GitHub\Address_Book_FINAL\MainWindow\x64\Debug\MainWindow.exe

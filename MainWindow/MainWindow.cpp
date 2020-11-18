@@ -11,7 +11,26 @@ using namespace libxl;
 
 MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
     ui.setupUi(this);
-    
+
+    Book* book = xlCreateBook();
+
+    if (book->load(L"address_book.xls")) {
+        Sheet* sheet = book->getSheet(0);
+        if (sheet) {
+
+            for (int row = 2; row < sheet->lastRow(); ++row) {
+
+                QString loadName = QString::fromWCharArray(sheet->readStr(row, 1));
+                QString loadSurname = QString::fromWCharArray(sheet->readStr(row, 2));
+                QString loadAddress = QString::fromWCharArray(sheet->readStr(row, 3));
+                QString loadPhone = QString::fromWCharArray(sheet->readStr(row, 4));
+                QString loadMail = QString::fromWCharArray(sheet->readStr(row, 5));
+
+                updateTable(NULL, loadName, loadSurname, loadAddress, loadPhone, loadMail);
+            }
+        }
+    }
+
     connect(&aggiungi, SIGNAL(addItem(QString, QString, QString, QString, QString, QString)),
             this, SLOT(updateTable(QString, QString, QString, QString, QString, QString)));
 
@@ -180,3 +199,24 @@ void MainWindow::on_saveButton_clicked() {
     qInfo() << "SAVED";
     book->release();
 }
+
+//void MainWindow::on_loadButton_clicked() {
+//    Book* book = xlCreateBook();
+//
+//    if (book->load(L"address_book.xls")) {
+//        Sheet* sheet = book->getSheet(0);
+//        if (sheet) {
+//
+//            for (int row = 2; row < sheet->lastRow(); ++row) {
+//
+//                QString loadName = QString::fromWCharArray(sheet->readStr(row, 1));
+//                QString loadSurname = QString::fromWCharArray(sheet->readStr(row, 2));
+//                QString loadAddress = QString::fromWCharArray(sheet->readStr(row, 3));
+//                QString loadPhone = QString::fromWCharArray(sheet->readStr(row, 4));
+//                QString loadMail = QString::fromWCharArray(sheet->readStr(row, 5));
+//
+//                updateTable(NULL, loadName, loadSurname, loadAddress, loadPhone, loadMail);
+//            }
+//        }
+//    }
+//}
