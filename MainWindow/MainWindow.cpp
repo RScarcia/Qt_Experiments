@@ -36,12 +36,14 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
 
     connect(this, SIGNAL(sendObject(QString, QString, QString, QString, QString, QString)),
             &aggiungi, SLOT(receiveFromGUI(QString, QString, QString, QString, QString, QString)));
+
 }
 
 void MainWindow::updateTable(QString PhotoURL, QString Name, QString Surname, QString Address, QString Phone, QString Mail) {
-    
-    QTableWidgetItem* curItem = ui.addressList->currentItem();
-    int row = 0;
+   
+    //qInfo() << "Current_ROW:" << row;
+    int row = ui.addressList->rowCount();
+
     if(curItem){
         //qInfo() << "Current_ROW:" << ui.addressList->row(curItem);
         row = ui.addressList->row(curItem);
@@ -84,6 +86,7 @@ void MainWindow::updateTable(QString PhotoURL, QString Name, QString Surname, QS
 
 void MainWindow::on_addButton_clicked() {
     aggiungi.show();
+    curItem = NULL;
 }
 
 void MainWindow::closeEvent(QCloseEvent* event) {
@@ -113,7 +116,7 @@ void MainWindow::on_deleteButton_clicked() {
 }
 
 void MainWindow::on_editButton_clicked() {
-    QTableWidgetItem* curItem = ui.addressList->currentItem();
+    curItem = ui.addressList->currentItem();
 
     if (curItem) { 
         int row = ui.addressList->row(curItem);
@@ -198,6 +201,9 @@ void MainWindow::on_saveButton_clicked() {
     book->save(L"address_book.xls");
     qInfo() << "SAVED";
     book->release();
+
+    //QMessageBox::warning(this, tr("Attenzione"), tr("Missing Name"), QMessageBox::Ok);
+    QMessageBox::information(this, tr("Info"), tr("File saved in local directory."), QMessageBox::Ok);
 }
 
 //void MainWindow::on_loadButton_clicked() {

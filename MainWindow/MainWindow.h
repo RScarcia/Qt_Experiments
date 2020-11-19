@@ -16,6 +16,7 @@ private:
     Ui::MainWindowClass ui;
     AddWindow aggiungi;
     QList<QString> listURL;
+    QTableWidgetItem* curItem = NULL;
     void closeEvent(QCloseEvent* event);
 
 signals:

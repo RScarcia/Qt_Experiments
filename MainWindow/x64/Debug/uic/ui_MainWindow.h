@@ -34,7 +34,6 @@ public:
     QPushButton *editButton;
     QSpacerItem *verticalSpacer_2;
     QPushButton *saveButton;
-    QPushButton *loadButton;
 
     void setupUi(QWidget *MainWindowClass)
     {
@@ -79,9 +78,7 @@ public:
         __qtablewidgetitem5->setFont(font);
         addressList->setHorizontalHeaderItem(5, __qtablewidgetitem5);
         addressList->setObjectName(QString::fromUtf8("addressList"));
-        QFont font1;
-        font1.setFamily(QString::fromUtf8("Lato"));
-        addressList->setFont(font1);
+        addressList->setFont(font);
         addressList->setStyleSheet(QString::fromUtf8("QTableWidget{\n"
 "	background-color: #ffffff;\n"
 "	alternate-background-color: #d0edff;\n"
@@ -132,12 +129,6 @@ public:
 
         verticalLayout->addWidget(saveButton);
 
-        loadButton = new QPushButton(MainWindowClass);
-        loadButton->setObjectName(QString::fromUtf8("loadButton"));
-        loadButton->setFont(font);
-
-        verticalLayout->addWidget(loadButton);
-
 
         gridLayout_2->addLayout(verticalLayout, 0, 1, 1, 1);
 
@@ -169,7 +160,6 @@ public:
         deleteButton->setText(QCoreApplication::translate("MainWindowClass", "Delete", nullptr));
         editButton->setText(QCoreApplication::translate("MainWindowClass", "Edit", nullptr));
         saveButton->setText(QCoreApplication::translate("MainWindowClass", "Save", nullptr));
-        loadButton->setText(QCoreApplication::translate("MainWindowClass", "Load", nullptr));
     } // retranslateUi
 
 };
