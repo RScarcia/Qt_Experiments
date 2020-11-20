@@ -10,7 +10,7 @@ class MainWindow : public QWidget
 
 public:
     MainWindow(QWidget *parent = Q_NULLPTR);
-    QTableWidget addressList;
+    QTableWidget addressTable;
 
 private:
     Ui::MainWindowClass ui;
@@ -28,5 +28,4 @@ private slots:
     void on_deleteButton_clicked();
     void on_editButton_clicked();
     void on_saveButton_clicked();
-    //void on_loadButton_clicked();
 };

@@ -19,6 +19,10 @@
   <property name="windowTitle">
    <string>Address Book</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../../../Downloads/address-book.png</normaloff>../../../../Downloads/address-book.png</iconset>
+  </property>
   <layout class="QGridLayout" name="gridLayout_3">
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout_2">

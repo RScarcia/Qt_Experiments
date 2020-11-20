@@ -10,6 +10,7 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHeaderView>
@@ -44,6 +45,9 @@ public:
         font.setFamily(QString::fromUtf8("Lato"));
         font.setPointSize(9);
         MainWindowClass->setFont(font);
+        QIcon icon;
+        icon.addFile(QString::fromUtf8("../../../../Downloads/address-book.png"), QSize(), QIcon::Normal, QIcon::Off);
+        MainWindowClass->setWindowIcon(icon);
         gridLayout_3 = new QGridLayout(MainWindowClass);
         gridLayout_3->setSpacing(6);
         gridLayout_3->setContentsMargins(11, 11, 11, 11);

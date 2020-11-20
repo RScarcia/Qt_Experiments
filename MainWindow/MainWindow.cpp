@@ -12,6 +12,8 @@ using namespace libxl;
 MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
     ui.setupUi(this);
 
+    //Load xls file of the address book
+    //Unable to upload photos
     Book* book = xlCreateBook();
 
     if (book->load(L"address_book.xls")) {
@@ -31,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
         }
     }
 
+    //Signals
     connect(&aggiungi, SIGNAL(addItem(QString, QString, QString, QString, QString, QString)),
             this, SLOT(updateTable(QString, QString, QString, QString, QString, QString)));
 
@@ -44,6 +47,8 @@ void MainWindow::updateTable(QString PhotoURL, QString Name, QString Surname, QS
     //qInfo() << "Current_ROW:" << row;
     int row = ui.addressList->rowCount();
 
+    //If curItem is selected set row = row of currentItem
+    //else add a new row
     if(curItem){
         //qInfo() << "Current_ROW:" << ui.addressList->row(curItem);
         row = ui.addressList->row(curItem);
@@ -52,7 +57,8 @@ void MainWindow::updateTable(QString PhotoURL, QString Name, QString Surname, QS
         ui.addressList->insertRow(ui.addressList->rowCount());
 	    row = ui.addressList->rowCount() - 1;
     }
-       
+    
+    //Set photo
     QTableWidgetItem* photoItem = new QTableWidgetItem();
     if (PhotoURL.isEmpty()) {
         photoItem->setData(Qt::DecorationRole,
@@ -60,7 +66,7 @@ void MainWindow::updateTable(QString PhotoURL, QString Name, QString Surname, QS
                                                                                                                                  Qt::KeepAspectRatio, 
                                                                                                                                  Qt::SmoothTransformation));
 
-        listURL.append("C:/Users/Rossella/Documents/GitHub/Address_Book_FINAL/MainWindow/Images/man256.png");
+        listURL.append("MainWindow/Images/man256.png");
     } else {
         photoItem->setData(Qt::DecorationRole, QPixmap(PhotoURL).scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
         listURL.append(PhotoURL);
@@ -198,31 +204,10 @@ void MainWindow::on_saveButton_clicked() {
     }
 
     //saving
+    //Unable to choose saving path
     book->save(L"address_book.xls");
     qInfo() << "SAVED";
     book->release();
 
-    //QMessageBox::warning(this, tr("Attenzione"), tr("Missing Name"), QMessageBox::Ok);
     QMessageBox::information(this, tr("Info"), tr("File saved in local directory."), QMessageBox::Ok);
 }
-
-//void MainWindow::on_loadButton_clicked() {
-//    Book* book = xlCreateBook();
-//
-//    if (book->load(L"address_book.xls")) {
-//        Sheet* sheet = book->getSheet(0);
-//        if (sheet) {
-//
-//            for (int row = 2; row < sheet->lastRow(); ++row) {
-//
-//                QString loadName = QString::fromWCharArray(sheet->readStr(row, 1));
-//                QString loadSurname = QString::fromWCharArray(sheet->readStr(row, 2));
-//                QString loadAddress = QString::fromWCharArray(sheet->readStr(row, 3));
-//                QString loadPhone = QString::fromWCharArray(sheet->readStr(row, 4));
-//                QString loadMail = QString::fromWCharArray(sheet->readStr(row, 5));
-//
-//                updateTable(NULL, loadName, loadSurname, loadAddress, loadPhone, loadMail);
-//            }
-//        }
-//    }
-//}

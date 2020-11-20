@@ -10,6 +10,7 @@
 #define UI_ADDWINDOW_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
@@ -58,6 +59,9 @@ public:
         if (AddWindow->objectName().isEmpty())
             AddWindow->setObjectName(QString::fromUtf8("AddWindow"));
         AddWindow->resize(793, 418);
+        QIcon icon;
+        icon.addFile(QString::fromUtf8("../../../../Downloads/address-book.png"), QSize(), QIcon::Normal, QIcon::Off);
+        AddWindow->setWindowIcon(icon);
         gridLayout_2 = new QGridLayout(AddWindow);
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -239,7 +243,7 @@ public:
 
     void retranslateUi(QWidget *AddWindow)
     {
-        AddWindow->setWindowTitle(QCoreApplication::translate("AddWindow", "AddWindow", nullptr));
+        AddWindow->setWindowTitle(QCoreApplication::translate("AddWindow", "Add", nullptr));
         nameText->setText(QCoreApplication::translate("AddWindow", "Name:", nullptr));
         phoneEdit->setText(QString());
         addressText->setText(QCoreApplication::translate("AddWindow", "Address:", nullptr));
