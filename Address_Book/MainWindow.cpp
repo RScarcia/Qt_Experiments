@@ -62,11 +62,11 @@ void MainWindow::updateTable(QString PhotoURL, QString Name, QString Surname, QS
     QTableWidgetItem* photoItem = new QTableWidgetItem();
     if (PhotoURL.isEmpty()) {
         photoItem->setData(Qt::DecorationRole,
-                            QPixmap("C:/Users/Rossella/Documents/GitHub/Address_Book_FINAL/MainWindow/Images/man256.png").scaled(100, 100,
+                            QPixmap("C:/...../Images/man256.png").scaled(100, 100,
                                                                                                                                  Qt::KeepAspectRatio, 
                                                                                                                                  Qt::SmoothTransformation));
 
-        listURL.append("MainWindow/Images/man256.png");
+        listURL.append("C:/...../Images/man256.png");
     } else {
         photoItem->setData(Qt::DecorationRole, QPixmap(PhotoURL).scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
         listURL.append(PhotoURL);
