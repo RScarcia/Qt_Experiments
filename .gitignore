@@ -33,3 +33,8 @@
 /MainWindow/.vs
 /MainWindow/x64
 /MainWindow/address_book.xls
+/Address_Book/address_book.xls
+/Address_Book/.vs/MainWindow/v16
+/Address_Book/debug
+/Address_Book/release
+/Address_Book/x64
